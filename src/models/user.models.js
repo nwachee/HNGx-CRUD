@@ -3,13 +3,9 @@ import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema(
   {
-    firstname: {
+    fullname: {
       type: String,
       required: [true, 'First name field is required'],
-    },
-    lastname: {
-      type: String,
-      required: [true, 'Last name field is required'],
     },
     email: {
       type: String,
