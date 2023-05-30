@@ -3,9 +3,11 @@ import { generateToken } from '../util/jwt.util.js';
 
 export const register = async (req, res, next) => {
   try {
-    await services.CreateUser(req.body);
+    
+        const newUser = await services.CreateUser(req.body);
 
-    res.status(201).json({ message: 'User created', success: true });
+
+    res.status(201).json({ message: 'User Registered Sucessfully', success: true, data: newUser });
   } catch (error) {
     next(error);
   }
@@ -17,7 +19,7 @@ export const login = async (req, res, next) => {
 
     const token = generateToken({ _id }, { expiresIn: '5d' });
 
-    res.json({ token, success: true });
+    res.json({ success: true, message: "Login Successful", data: token });
   } catch (error) {
     next(error);
   }
