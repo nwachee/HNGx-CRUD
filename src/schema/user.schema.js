@@ -12,3 +12,10 @@ export const loginSchema = Joi.object().keys({
     password: Joi.string().min(8).max(30).required(),
   })
 
+  export const userUpdate = Joi.object({
+    fullname: Joi.string(),
+    email: Joi.string(),
+    gender: Joi.string(),
+    password: Joi.string(),
+  })
+  

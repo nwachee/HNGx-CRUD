@@ -28,14 +28,13 @@
     [ POST: create a new user]  `/api/auth`
     [ GET: get all users]  `/api/auth`
     [ GET: get a single user] `/api/auth/<id>`
-    [ GET: get a single user by username] `/api/auth/@:username`
     [ PUT: update or replace auth] `/api/auth/<id>`
     [ DELETE: delete a user] `/api/auth/<id>`
  
  - `docs: `
    [ GET: get API Documentation] `/api/docs`
 
-- Database Schema : 
+- Database Schema : https://dbdiagram.io/d/64fe69fa02bd1c4a5e4dcb09
 
 - API Documentation : https://documenter.getpostman.com/view/23369669/2s9YC1XEzd
 

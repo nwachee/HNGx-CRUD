@@ -1,6 +1,6 @@
-import { HttpException } from '../exceptions/HttpException';
-import User from '../models/user.models';
-import { verifyToken } from '../util/jwt.util';
+import { HttpException } from '../exceptions/HttpException.js';
+import User from '../models/user.models.js';
+import { verifyToken } from '../util/jwt.util.js';
 
 export const isAuth = async (req, res, next) => {
   const token = req.headers['authorization']
