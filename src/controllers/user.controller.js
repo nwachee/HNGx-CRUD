@@ -12,7 +12,7 @@ export const register = async (req, res, next) => {
   }
 };
 
-//Get a Single by Name
+//Get a Single by Name or ID
 export const findUser = async (req, res, next) => {
   try {
     let user
@@ -46,14 +46,14 @@ success: true, message: 'Users Fetched Successfully',data: users })
 export const updateUser = async (req, res, next) => {
   const updateData = req.body;
   try { 
-const user = await services.fetchById(req.params.id);
+const user = await services.fetchUser({_id: req.params.id});
 //check user
 if(!user) {
-res.status(403).json({success: false, message: 'User to update not found' })
+res.status(404).json({success: false, message: 'User to update not found' })
       } 
 //check for existing user 
 if(updateData.email){
-const userUpdate = await services.fetchOne({ email: updateData.email.toLowerCase()})
+const userUpdate = await services.fetchUser({ email: updateData.email.toLowerCase()})
 if(userUpdate){
 if(userUpdate._id.toString() !== id){
 res.status(403).json({success: false,message: 'User already exists'})}
@@ -61,7 +61,7 @@ res.status(403).json({success: false,message: 'User already exists'})}
 }
 //update user
 const updatedData = await services.updateUser(req.params.id, updateData)
-res.status(200).json({success: true,message: 'User updated successfully',data: updatedData})
+res.status(201).json({success: true,message: 'User updated successfully',data: updatedData})
 } 
   catch (error) {next(error);}
 }
@@ -69,7 +69,7 @@ res.status(200).json({success: true,message: 'User updated successfully',data: u
 export const deleteUser = async (req, res, next) =>{
 try {
 //check if user exits before updating
-const checkUser = await services.fetchById({ _id: req.params.id })
+const checkUser = await services.deleteUser({ _id: req.params.id })
 if(!checkUser) return res.status(404).json({success: false,message: 'User not found'})
 //delete user 
 await services.deleteUser(req.params.id)
