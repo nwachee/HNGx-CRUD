@@ -1,6 +1,8 @@
 import * as services from '../services/user.service.js';
-import { generateToken } from '../util/jwt.util.js';
+import mongodb from 'mongodb';
+const ObjectId = mongodb.ObjectId;
 
+//Create a User
 export const register = async (req, res, next) => {
   try {
      const newUser = await services.CreateUser(req.body);
@@ -10,24 +12,19 @@ export const register = async (req, res, next) => {
   }
 };
 
-export const login = async (req, res, next) => {
-  try {
-    const { _id } = await services.Login(req.body);
-
-    const token = generateToken({ _id }, { expiresIn: '5d' });
-
-    res.json({ success: true, message: "Login Successful", data: token });
-  } catch (error) {
-    next(error);
-  }
-};
-
-//Get a Single by Id
+//Get a Single by Name
 export const findUser = async (req, res, next) => {
   try {
-const user = await services.fetchById({ _id: req.params.id })
-if(!user)
-{  return res.status(404).json({success: false, message: 'User not found'})}
+    let user
+    // Get the ID or name from the request
+  const idOrName = req.params.idOrName;
+  const isValid = ObjectId.isValid(idOrName);
+  if(isValid){
+     user = await services.fetchUser({_id: idOrName})
+  } else {
+     user = await services.fetchUser({fullname: idOrName})
+  }
+if(!user){ return res.status(404).json({success: false, message: 'User not found'})}
 return res.status(200).json({success: true,message: user})    
   } catch (error) {
     next(error)
@@ -36,7 +33,6 @@ return res.status(200).json({success: true,message: user})
 
 //Get All Users
 export const findAllUser = async (req, res, next) => {
-
   try {
   const users = await services.fetchAll()
 return res.status(200).json({
