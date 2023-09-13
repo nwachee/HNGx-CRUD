@@ -12,7 +12,7 @@ export const register = async (req, res, next) => {
   }
 };
 
-//Get a Single by Name
+//Get a Single by Name or ID
 export const findUser = async (req, res, next) => {
   try {
     let user
@@ -49,7 +49,7 @@ export const updateUser = async (req, res, next) => {
 const user = await services.fetchUser({_id: req.params.id});
 //check user
 if(!user) {
-res.status(403).json({success: false, message: 'User to update not found' })
+res.status(404).json({success: false, message: 'User to update not found' })
       } 
 //check for existing user 
 if(updateData.email){
@@ -61,7 +61,7 @@ res.status(403).json({success: false,message: 'User already exists'})}
 }
 //update user
 const updatedData = await services.updateUser(req.params.id, updateData)
-res.status(200).json({success: true,message: 'User updated successfully',data: updatedData})
+res.status(201).json({success: true,message: 'User updated successfully',data: updatedData})
 } 
   catch (error) {next(error);}
 }
