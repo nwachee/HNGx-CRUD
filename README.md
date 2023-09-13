@@ -1,5 +1,5 @@
 # HNGx-CRUD
-- A simple REST API capable of CRUD operations on a "person" resource, interfacing with any database of your choice. Your API should dynamically handle parameters, such as adding or retrieving a person by name
+- A simple REST API capable of CRUD operations on a "person" resource, interfacing with any database of your choice.
 
 ## Tech Stack
 - Node js
@@ -21,18 +21,18 @@
 - Finally run `npm start` in your terminal
 
 ### Endpoints : 
-- Healthcheck: `/api/healthcheck` 
+- Healthcheck: `/healthcheck` 
     [ GET: Server Health Check ]
 
 - `user: `
-    [ POST: create a new user]  `/api/auth`
-    [ GET: get all users]  `/api/auth`
-    [ GET: get a single user] `/api/auth/<id>`
-    [ PUT: update or replace auth] `/api/auth/<id>`
-    [ DELETE: delete a user] `/api/auth/<id>`
+    [ POST: create a new user]  `/api/user`
+    [ GET: get all users]  `/api/user`
+    [ GET: get a single user] `/api/user/:<user_id>`
+    [ PUT: update user] `/api/user/:<user_id>`
+    [ DELETE: delete a user] `/api/user/:<user_id>`
  
  - `docs: `
-   [ GET: get API Documentation] `/api/docs`
+   [ GET: get API Documentation] `/docs`
 
 - Database Schema : https://dbdiagram.io/d/64fe69fa02bd1c4a5e4dcb09
 

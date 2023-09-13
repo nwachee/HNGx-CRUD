@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import auth from './auth.route.js';
-import doc from './doc.route.js';
+import auth from './user.route.js';
 
 const router = Router();
+
+router.get('/docs', (req, res) => { res.redirect('https://documenter.getpostman.com/view/23369669/2s9YC1XEzd')});
 
 router.get('/healthcheck', (req, res) => {
   res.status(200).json({ message: 'Server ok' });
 });
 
-router.use('/auth', auth);
-router.use('/docs', doc);
+router.use('/api', auth);
 
 export default router;
