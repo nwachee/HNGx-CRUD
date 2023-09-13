@@ -25,7 +25,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api', routes);
+app.use('/', routes);
 
 app.use(notFound);
 
@@ -35,3 +35,4 @@ app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
   await connectDb();
 });
+
